@@ -18,6 +18,7 @@ namespace IroiroMonitor.ViewModels
 
         private double _temperature;
         private double _humidity;
+        private string _cpuTemp;
 
         public double Temperature
         {
@@ -28,6 +29,11 @@ namespace IroiroMonitor.ViewModels
         {
             get { return _humidity; }
             set { SetProperty(ref _humidity, value); }
+        }
+        public string CpuTemp
+        {
+            get { return _cpuTemp; }
+            set { SetProperty(ref _cpuTemp, value); }
         }
 
         public MainWindowViewModel()
@@ -48,7 +54,8 @@ namespace IroiroMonitor.ViewModels
                         double.TryParse(sensor.humidity, out hum);
                         Temperature = temp;
                         Humidity = hum;
-                        Thread.Sleep(1000);
+                        CpuTemp = sensor.cputemp;
+                        Thread.Sleep(1000 * 60);
                     }
                 }
                 catch (Exception ex)
