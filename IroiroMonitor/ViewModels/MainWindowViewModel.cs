@@ -19,6 +19,7 @@ namespace IroiroMonitor.ViewModels
         private double _temperature;
         private double _humidity;
         private string _cpuTemp;
+        private string _gpuTemp;
         private string _dateTime;
 
         public double Temperature
@@ -35,6 +36,11 @@ namespace IroiroMonitor.ViewModels
         {
             get { return _cpuTemp; }
             set { SetProperty(ref _cpuTemp, value); }
+        }
+        public string GpuTemp
+        {
+            get { return _gpuTemp; }
+            set { SetProperty(ref _gpuTemp, value); }
         }
         public string DateTime
         {
@@ -61,6 +67,7 @@ namespace IroiroMonitor.ViewModels
                         Temperature = temp;
                         Humidity = hum;
                         CpuTemp = sensor.cputemp;
+                        GpuTemp = sensor.gputemp;
                         DateTime = sensor.datetime;
                         Thread.Sleep(1000 * 60);
                     }

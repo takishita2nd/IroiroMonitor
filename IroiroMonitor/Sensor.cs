@@ -18,5 +18,7 @@ namespace IroiroMonitor
         public string humidity { get; set; }
         [JsonProperty("cputemp")]
         public string cputemp { get; set; }
+        [JsonProperty("gputemp")]
+        public string gputemp { get; set; }
     }
 }
