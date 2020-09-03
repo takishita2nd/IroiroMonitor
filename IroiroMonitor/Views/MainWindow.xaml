@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="379.564" Width="525">
+        Title="{Binding Title}" Height="400" Width="680">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -26,5 +27,6 @@
         <Label Grid.Row="2" Grid.Column="1" Content="{Binding Humidity}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48"/>
         <Label Grid.Row="3" Grid.Column="1" Content="{Binding CpuTemp}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48"/>
         <Label Grid.Row="4" Grid.Column="1" Content="{Binding GpuTemp}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48"/>
+        <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Content="ボタン" Command="{Binding ButtonClickCommand}" FontSize="48" />
     </Grid>
 </Window>

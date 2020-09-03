@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 
 namespace IroiroMonitor.ViewModels
@@ -15,6 +16,8 @@ namespace IroiroMonitor.ViewModels
             get { return _title; }
             set { SetProperty(ref _title, value); }
         }
+
+        private const int CommandSwitch = 1;
 
         private double _temperature;
         private double _humidity;
@@ -48,12 +51,31 @@ namespace IroiroMonitor.ViewModels
             set { SetProperty(ref _dateTime, value); }
         }
 
+        public DelegateCommand ButtonClickCommand { get; }
+
         public MainWindowViewModel()
         {
+            ButtonClickCommand = new DelegateCommand(async () =>
+            {
+                Command cmd = new Command();
+                cmd.number = CommandSwitch;
+                var json = JsonConvert.SerializeObject(cmd);
+                try
+                {
+                    HttpClient client = new HttpClient();
+                    var content = new StringContent(json, Encoding.UTF8);
+                    await client.PostAsync("http://192.168.1.15:8000/", content);
+                }
+                catch (Exception ex)
+                {
+                }
+            });
+
             Thread thread = new Thread(new ThreadStart(async () => {
                 try
                 {
                     HttpClient client = new HttpClient();
+
                     while (true)
                     {
                         HttpResponseMessage response = await client.GetAsync("http://192.168.1.15:8000/");
